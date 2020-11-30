@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Mortal Kombat</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center;">Bem vindo ao torneio: {{ tournament.name }}</h1>
+    {% if matches|length < 1 %}
+        <div class="form">
+            <form action="/tournament/{{ tournament.id }}/competitor" method="POST">
+                <label>Clique aqui para criar as eliminatórias</label>
+                <input type="submit" value="Sortear os competidores">
+            </form>
+        <div>
+    {% else %}
+    <table>
+        <tr>
+            <th>Torneio</th>
+            <th>Número total de participantes</th>
+        </tr>
+        {% for tournament in tournaments %}
+        <tr>
+            <td><a href="/tournament/{{ tournament.id }}/competitor">{{ tournament.name }}</a></td>
+            <td>{{ tournament.competitors_number }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

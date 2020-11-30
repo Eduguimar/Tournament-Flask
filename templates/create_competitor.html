@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Mortal Kombat</title>
+{% endblock %}
+
+{% block body %}
+<div class="container text-center" id="content">
+    <div class="titulo">
+        <h1>Bem vindo ao {{ tournament.name }}</h1>
+        <img src="{{ url_for('static', filename='images/mortal_kombat.jpg') }}" alt="mortal kombat" height="30" width="30" style="text-align: center;"
+             class="img-responsive center-block" >
+    </div>
+
+    {% set counter = 0 %}
+
+    {% if competitors|length < 1 %}
+        <h2 style="text-align: center;" class="lead">Ainda não existe competidores neste torneio</h2>
+    {% else %}
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Competidores</th>
+                </tr>
+            </thead>
+            {% for competitor in competitors %}
+            <tbody>
+                <tr>
+                    <td>{{ competitor.name }}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if competitors|length < tournament.competitors_number %}
+        <div class="form">
+            <form action="/tournament/{{ tournament.id }}/competitor" method="POST" name="competitor" onsubmit="return validatecompetitor();">
+                <div class="form-group">
+                    <label for="name">Digite o nome do competidor: </label>
+                    <input type="text" name="name" id="name">
+                    <small class="form-text text-muted">Mínimo de três caracteres.</small>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Adicionar participante">
+            </form>
+        <div>
+    {% else %}
+       <div class="start">
+            <h3>Participantes prontos! Criar eliminatórias?</h3>
+       <div>
+    {% endif %}
+
+    <h2 class="lead"><a href="/tournament" >Voltar a página de torneios.</a></h2>
+
+</div>
+{% endblock %}
