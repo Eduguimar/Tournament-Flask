@@ -88,41 +88,41 @@ def add_competitor(id):
         return render_template('create_competitor.html', tournament=tournament, competitors=competitors)
 
 # Página da listagem de partidas de um torneio
-@app.route('/tournament/<int:id>/match', methods=['POST', 'GET'])
-def match(id):
-  #  tournament = Tournament.query.get_or_404(id)
-    competitors = Competitor.query.filter_by(tournament_id=tournament.id).all()
-    # matches = Match.query.filter_by(tournament_id=tournament.id).all()
+#@app.route('/tournament/<int:id>/match', methods=['POST', 'GET'])
+#def match(id):
+#    tournament = Tournament.query.get_or_404(id)
+#    competitors = Competitor.query.filter_by(tournament_id=tournament.id).all()
+#    matches = Match.query.filter_by(tournament_id=tournament.id).all()
 
-   # total_matches = len(competitors) / 2
+#    total_matches = len(competitors) / 2
 
-   # for x in range(total_matches):
-
-
-
-   # if request.method == 'POST':
-    #    shuffle_competitors = random.shuffle(competitors)
-    #    new_competitor = Competitor(name=competitor_name, tournament_id=tournament.id)
-
-    #    try:
-     #       return redirect('/tournament/<int:id>/match', tournament=tournament, competitors=competitors)
-    #    except:
-      #      return "Houve um problema ao criar as partidas"
-    #else:
-     #   return render_template('match.html', tournament=tournament, competitors=competitors, matches=matches)
+#    for x in range(total_matches):
 
 
-# ATENÇÃO - Deletar todos os registros
-@app.route('/tournament/delete')
-def delete():
-    try:
-        db.session.query(Match).delete()
-        db.session.query(Competitor).delete()
-        db.session.query(Tournament).delete()
-        db.session.commit()
-        return redirect('/tournament')
-    except:
-        return "Houve um erro ao deletar os registros"
+
+#    if request.method == 'POST':
+#        shuffle_competitors = random.shuffle(competitors)
+#        new_competitor = Competitor(name=competitor_name, tournament_id=tournament.id)
+#
+#        try:
+#            return redirect('/tournament/<int:id>/match', tournament=tournament, competitors=competitors)
+#        except:
+#            return "Houve um problema ao criar as partidas"
+#    else:
+#        return render_template('match.html', tournament=tournament, competitors=competitors, matches=matches)
+
+
+# ATENÇÃO - Deletar todos os registros(usado para testes)
+#@app.route('/tournament/delete')
+#def delete():
+#    try:
+#        db.session.query(Match).delete()
+#        db.session.query(Competitor).delete()
+#        db.session.query(Tournament).delete()
+#        db.session.commit()
+#        return redirect('/tournament')
+#    except:
+#        return "Houve um erro ao deletar os registros"
 
 if __name__ == '__main__':
 	app.run(debug=True)
